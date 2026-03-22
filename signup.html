@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game - Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="signup-body">
+    <video
+      class="signup-bg-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-hidden="true"
+    >
+      <source src="assets/signup/signUpBg2.mp4" type="video/mp4" />
+    </video>
+    <header class="page-header">
+      <a href="index.html" class="logo-container" aria-label="Home">
+        <img src="assets/header/logo2.png" alt="logo" class="logo" />
+      </a>
+      <nav class="nav-links">
+        <a href="signup.html">SIGN UP</a>
+        <a href="login.html">LOGIN</a>
+      </nav>
+    </header>
+
+    <main class="form-page">
+      <div class="form-card">
+        <div class="avatar-section">
+          <span class="name-label" id="name-label">NAME</span>
+          <div class="avatar-placeholder" aria-hidden="true">
+            <img src="assets/signup/c1.png" alt="Avatar" class="avatar-image" id="avatar-image" data-avatar="assets/signup/c1.png" />
+          </div>
+          <div class="avatar-picker hidden" id="avatar-picker" aria-label="Choose profile image">
+            <span class="avatar-picker-label">Choose profile</span>
+            <div class="avatar-picker-options">
+              <button type="button" class="avatar-option selected" data-src="assets/signup/c1.png" aria-label="Avatar 1">
+                <img src="assets/signup/c1.png" alt="Avatar 1" />
+              </button>
+              <button type="button" class="avatar-option" data-src="assets/signup/c2.png" aria-label="Avatar 2">
+                <img src="assets/signup/c2.png" alt="Avatar 2" />
+              </button>
+              <button type="button" class="avatar-option" data-src="assets/signup/c3.png" aria-label="Avatar 3">
+                <img src="assets/signup/c3.png" alt="Avatar 3" />
+              </button>
+            </div>
+          </div>
+          <button type="button" class="btn" id="avatar-edit-btn">EDIT</button>
+        </div>
+
+        <form id="signup-form" action="#" method="get" novalidate>
+          <h1>SIGN UP</h1>
+          <div class="signup-form-container">
+            <div class="form-group">
+              <label for="username">USERNAME</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                autocomplete="username"
+              />
+              <span class="field-error" id="username-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">EMAIL</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autocomplete="email"
+              />
+              <span class="field-error" id="email-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="password">PASSWORD</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="new-password"
+              />
+              <span class="field-error" id="password-error" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="confirm">CONFIRM PASSWORD</label>
+              <input
+                type="password"
+                id="confirm"
+                name="confirm"
+                autocomplete="new-password"
+              />
+              <span class="field-error" id="confirm-error" role="alert"></span>
+            </div>
+          </div>
+          <button type="submit" class="btn">SIGN UP</button>
+          <p class="signup-success hidden" id="signup-success" role="status">
+            Account created! Redirecting to login…
+          </p>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      document
+        .getElementById("signup-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          var usernameEl = document.getElementById("username");
+          var emailEl = document.getElementById("email");
+          var passwordEl = document.getElementById("password");
+          var confirmEl = document.getElementById("confirm");
+          var username = (usernameEl.value || "").trim();
+          var email = (emailEl.value || "").trim();
+          var password = passwordEl.value || "";
+          var confirm = confirmEl.value || "";
+
+          var usernameError = document.getElementById("username-error");
+          var emailError = document.getElementById("email-error");
+          var passwordError = document.getElementById("password-error");
+          var confirmError = document.getElementById("confirm-error");
+
+          usernameError.textContent = "";
+          emailError.textContent = "";
+          passwordError.textContent = "";
+          confirmError.textContent = "";
+
+          var valid = true;
+          if (!username) {
+            usernameError.textContent = "Please enter your username.";
+            valid = false;
+          }
+          if (!email) {
+            emailError.textContent = "Please enter your email.";
+            valid = false;
+          } else if (email.indexOf("@") === -1 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            emailError.textContent = "Please enter a valid email address (e.g. name@example.com).";
+            valid = false;
+          }
+          if (!password) {
+            passwordError.textContent = "Please enter your password.";
+            valid = false;
+          } else {
+            var minLen = 8;
+            var hasUpper = /[A-Z]/.test(password);
+            var hasLower = /[a-z]/.test(password);
+            var hasNumber = /[0-9]/.test(password);
+            var hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+            var requirements = [];
+            if (password.length < minLen) requirements.push("at least " + minLen + " characters");
+            if (!hasUpper) requirements.push("one uppercase letter");
+            if (!hasLower) requirements.push("one lowercase letter");
+            if (!hasNumber) requirements.push("one number");
+            if (!hasSpecial) requirements.push("one special character (!@#$%^&* etc.)");
+            if (requirements.length > 0) {
+              passwordError.textContent = "Use a strong password: " + requirements.join(", ") + ".";
+              valid = false;
+            }
+          }
+          if (!confirm) {
+            confirmError.textContent = "Please confirm your password.";
+            valid = false;
+          } else if (password !== confirm) {
+            confirmError.textContent = "Passwords do not match.";
+            valid = false;
+          }
+
+          if (!valid) return;
+
+          var avatarImg = document.getElementById("avatar-image");
+          var avatarSrc = (avatarImg && avatarImg.getAttribute("data-avatar")) || "assets/signup/c1.png";
+
+          var storageKey = "memoryGameUsers";
+          var stored = localStorage.getItem(storageKey);
+          var users = stored ? JSON.parse(stored) : [];
+
+          var byEmail = users.find(function (u) { return u.email.toLowerCase() === email.toLowerCase(); });
+          var byUsername = users.find(function (u) { return u.username.toLowerCase() === username.toLowerCase(); });
+
+          if (byEmail && byUsername && byEmail.username.toLowerCase() === username.toLowerCase()) {
+            emailError.textContent = "This account is already registered. Please log in.";
+            return;
+          }
+          if (byEmail) {
+            emailError.textContent = "This email already has an account.";
+            return;
+          }
+          if (byUsername) {
+            usernameError.textContent = "This username is already taken.";
+            return;
+          }
+
+          users.push({ username: username, email: email, password: password, avatar: avatarSrc });
+          localStorage.setItem(storageKey, JSON.stringify(users));
+          localStorage.setItem("currentUser", JSON.stringify({ username: username, email: email, avatar: avatarSrc }));
+
+          var nameLabel = document.getElementById("name-label");
+          nameLabel.textContent = "NAME - " + username;
+
+          var successEl = document.getElementById("signup-success");
+          if (successEl) {
+            successEl.classList.remove("hidden");
+            setTimeout(function () {
+              window.location.href = "login.html";
+            }, 2000);
+          }
+        });
+
+      (function () {
+        var editBtn = document.getElementById("avatar-edit-btn");
+        var picker = document.getElementById("avatar-picker");
+        var avatarImg = document.getElementById("avatar-image");
+        var options = document.querySelectorAll(".avatar-option");
+
+        editBtn.addEventListener("click", function () {
+          picker.classList.toggle("hidden");
+          if (!picker.classList.contains("hidden")) {
+            var currentPath = avatarImg.getAttribute("data-avatar") || "";
+            options.forEach(function (b) {
+              b.classList.toggle("selected", b.getAttribute("data-src") === currentPath);
+            });
+          }
+        });
+
+        options.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var src = btn.getAttribute("data-src");
+            if (src) {
+              avatarImg.src = src;
+              avatarImg.setAttribute("data-avatar", src);
+              picker.classList.add("hidden");
+            }
+            options.forEach(function (b) { b.classList.remove("selected"); });
+            btn.classList.add("selected");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

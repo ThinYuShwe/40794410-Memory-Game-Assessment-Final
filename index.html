@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory Game - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="index-body">
+    <video class="index-bg-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="assets/index/indexVideoBg1.mp4" type="video/mp4" />
+    </video>
+    <header class="page-header">
+      <a href="index.html" class="logo-container" aria-label="Home">
+        <img src="assets/header/logo2.png" alt="logo" class="logo" />
+      </a>
+      <nav class="nav-links">
+        <a href="signup.html">SIGN UP</a>
+        <a href="login.html">LOGIN</a>
+      </nav>
+    </header>
+
+    <main class="home">
+      <h1>WELCOME</h1>
+      <a href="gamesetup.html" class="startBtn">START</a>
+    </main>
+
+    <div class="user-profile-wrap hidden" id="user-profile-wrap">
+      <button type="button" class="user-profile-btn" id="user-profile-btn" aria-label="View profile">
+        <img src="assets/footer/user.png" alt="Profile" />
+      </button>
+    </div>
+    <div class="modal-overlay profile-modal hidden" id="profile-modal">
+      <div class="modal">
+        <h2>PROFILE</h2>
+        <img src="" alt="Your profile" class="profile-avatar" id="profile-avatar" />
+        <p class="profile-username" id="profile-username"></p>
+        <p class="profile-email" id="profile-email"></p>
+        <button type="button" class="btn" id="profile-close">CLOSE</button>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var cu = localStorage.getItem("currentUser");
+        var wrap = document.getElementById("user-profile-wrap");
+        if (!cu || !wrap) return;
+        var user = JSON.parse(cu);
+        var avatarSrc = user.avatar || "assets/signup/c1.png";
+        wrap.classList.remove("hidden");
+        wrap.querySelector(".user-profile-btn img").src = avatarSrc;
+        wrap.querySelector(".user-profile-btn img").alt = "Your profile";
+        var btn = document.getElementById("user-profile-btn");
+        var modal = document.getElementById("profile-modal");
+        var closeBtn = document.getElementById("profile-close");
+        btn.addEventListener("click", function () {
+          document.getElementById("profile-avatar").src = avatarSrc;
+          document.getElementById("profile-username").textContent = "NAME: " + (user.username || "");
+          document.getElementById("profile-email").textContent = "EMAIL: " + (user.email || "");
+          modal.classList.remove("hidden");
+        });
+        closeBtn.addEventListener("click", function () { modal.classList.add("hidden"); });
+        modal.addEventListener("click", function (e) { if (e.target === modal) modal.classList.add("hidden"); });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1054 @@
+/* Memory Game - Shared styles (placeholders for your exported assets) */
+:root {
+  --pink: #e91e8c;
+  --pink-dark: #c2185b;
+  --pink-light: #f8bbd9;
+  --purple: #9c27b0;
+  --bg-soft: #fce4ec;
+  --bg-gradient: linear-gradient(160deg, #fce4ec 0%, #f3e5f5 50%, #e1bee7 100%);
+  --white: #fff;
+  --text-dark: #4a148c;
+  --shadow: 0 4px 12px rgba(156, 39, 176, 0.2);
+  --radius: 12px;
+  --radius-btn: 8px;
+  --font-pixel: "Press Start 2P", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-pixel);
+  min-height: 100vh;
+  background: transparent;
+  /* Add your own: background-image: url('../assets/bg-home.png'); background-size: cover; */
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.index-body {
+  position: relative;
+}
+
+/* Video background (CSS cannot use video in background-image) */
+.index-bg-video,
+.gamesetup-bg-video,
+.game-bg-video,
+.signup-bg-video,
+.login-bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.gamesetup-body {
+  position: relative;
+}
+
+/* Game setup page – button style to match dark ruins / torch-lit background */
+.gamesetup-body .btn {
+  background: rgba(40, 50, 45, 0.65);
+  color: rgba(255, 248, 240, 1);
+  border: 2px solid rgba(180, 150, 90, 0.55);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+.gamesetup-body .btn:hover {
+  background: rgba(55, 65, 55, 0.75);
+  border-color: rgba(200, 165, 100, 0.7);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(220, 180, 90, 0.15);
+}
+.gamesetup-body .option-group .btn.selected {
+  background: rgba(120, 95, 55, 0.6);
+  border-color: rgba(220, 180, 100, 0.85);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 248, 240, 0.4),
+    0 0 16px rgba(220, 170, 80, 0.2);
+}
+.gamesetup-body .setup-page h2 {
+  color: rgba(255, 248, 240, 0.95);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+.gamesetup-body .nav-links a {
+  color: rgba(255, 248, 240, 0.9);
+}
+
+/* Header shared across pages */
+.page-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  z-index: 10;
+}
+
+.logo {
+  width: 4rem;
+}
+
+.logo-container {
+  display: block;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a {
+  color: var(--pink-dark);
+  text-decoration: none;
+  font-size: 0.65rem;
+}
+@media (min-width: 600px) {
+  .nav-links a {
+    font-size: 0.75rem;
+  }
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-pixel);
+  background: var(--pink);
+  color: var(--white);
+  border: 3px solid var(--pink-dark);
+  border-radius: var(--radius-btn);
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 0.65rem;
+  transition:
+    transform 0.1s,
+    box-shadow 0.2s;
+  text-decoration: none;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn-large {
+  padding: 1rem 2.5rem;
+  font-size: 0.75rem;
+}
+
+/* Home page */
+.home {
+  text-align: center;
+  max-width: 600px;
+}
+
+.home h1 {
+  font-size: 3rem;
+  color: var(--white);
+  text-shadow: 3px 3px 0 var(--pink-dark);
+  margin-bottom: 2rem;
+}
+
+/* Link as button so background image fills like a div (buttons often don’t) */
+.startBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: var(--white);
+  text-decoration: none;
+  background: rgba(180, 200, 220, 0.25);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    box-shadow 0.2s,
+    background 0.2s,
+    border-color 0.2s;
+}
+.startBtn:hover {
+  transform: translateY(-2px);
+  background: rgba(200, 215, 235, 0.35);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.startBtn:active {
+  transform: translateY(0);
+}
+
+/* Game setup page */
+.setup-page {
+  width: 100%;
+  max-width: 520px;
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.setup-page h2 {
+  font-size: 0.75rem;
+  color: var(--pink-dark);
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+/* .option-group {
+  margin-bottom: 1.5rem;
+} */
+
+.option-group .buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.option-group .btn {
+  min-width: 100px;
+  padding: 1rem;
+}
+
+.option-group .btn.selected {
+  background: var(--pink-dark);
+  box-shadow: inset 0 0 0 2px var(--white);
+}
+
+.start-game-wrap {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.setup-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.setup-nav button {
+  background: transparent;
+  border: none;
+  color: var(--pink-dark);
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+/* Form pages (signup, signin) */
+.form-page {
+  width: 100%;
+  max-width: 40rem;
+  padding: 7rem 1rem 1rem;
+}
+
+.form-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.form-page h1 {
+  font-size: 1rem;
+  color: var(--pink-dark);
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--pink-dark);
+  margin-bottom: 0.35rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 2px solid var(--pink-light);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--pink);
+}
+
+.form-page .btn {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.85rem;
+}
+
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.avatar-section .name-label {
+  font-size: 0.6rem;
+  color: var(--pink-dark);
+  margin-bottom: 0.5rem;
+}
+
+/* .avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  background: var(--pink-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+} */
+
+.avatar-section .btn {
+  width: auto;
+  min-width: 100px;
+}
+
+.forgot-link {
+  display: block;
+  text-align: center;
+  margin-top: 0.75rem;
+  font-size: 0.55rem;
+  color: var(--pink-dark);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Login page – colors to match dark autumn/twilight tree background */
+.login-body {
+  position: relative;
+}
+.login-body .nav-links a {
+  color: rgba(255, 248, 240, 0.9);
+}
+.login-body .form-card {
+  background: rgba(28, 38, 48, 0.35);
+  border: 1px solid rgba(180, 140, 100, 0.4);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+}
+.login-body .form-page h1 {
+  color: rgba(255, 248, 240, 0.95);
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+.login-body .form-group label {
+  color: rgba(255, 248, 240, 0.88);
+}
+.login-body .form-group input {
+  background: rgba(35, 45, 55, 0.75);
+  border: 1px solid rgba(180, 140, 100, 0.35);
+  color: rgba(255, 248, 240, 0.95);
+}
+.login-body .form-group input::placeholder {
+  color: rgba(255, 248, 240, 0.4);
+}
+.login-body .form-group input:focus {
+  border-color: rgba(200, 160, 110, 0.6);
+  box-shadow: 0 0 12px rgba(180, 140, 100, 0.15);
+}
+.login-body .field-error {
+  display: block;
+  font-size: 0.5rem;
+  color: #f8a0a0;
+  margin-top: 0.35rem;
+}
+.login-body .form-page .btn {
+  background: rgba(50, 60, 55, 0.7);
+  color: rgba(255, 248, 240, 1);
+  border: 2px solid rgba(180, 150, 90, 0.5);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+.login-body .form-page .btn:hover {
+  background: rgba(70, 80, 65, 0.85);
+  border-color: rgba(200, 165, 100, 0.65);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(200, 160, 100, 0.12);
+}
+.login-body .forgot-link {
+  color: rgba(255, 248, 240, 0.75);
+}
+.login-body .forgot-link:hover {
+  color: rgba(255, 248, 240, 0.95);
+}
+
+/* Signup page – colors to match dark celestial / starry night background */
+.signup-body {
+  position: relative;
+}
+.signup-body .nav-links a {
+  color: rgba(255, 248, 250, 0.9);
+}
+.signup-body .form-card {
+  background: rgb(28 32 48 / 29%);
+  border: 1px solid rgb(255 255 255 / 71%);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2.5rem;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.75rem 2rem;
+}
+
+.signup-body .form-card > form {
+  flex: 1;
+  min-width: 0;
+}
+
+.signup-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.signup-body .form-page h1 {
+  color: rgba(255, 248, 255, 0.95);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+.signup-body .form-group label,
+.signup-body .avatar-section .name-label {
+  color: rgba(255, 248, 255, 0.9);
+}
+.signup-body .avatar-section .name-label {
+  margin-bottom: 0.4rem;
+}
+.signup-body .avatar-section {
+  align-items: flex-start;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+.signup-body .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.signup-body .form-group:last-of-type {
+  margin-bottom: 0;
+}
+.signup-body .form-group input {
+  background: rgba(40, 45, 60, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 248, 255, 0.95);
+}
+.signup-body .form-group input::placeholder {
+  color: rgba(255, 248, 255, 0.4);
+}
+.signup-body .field-error {
+  display: block;
+  font-size: 0.45rem;
+  color: #ff8a80;
+  margin-top: 0.35rem;
+  line-height: 1rem;
+}
+.signup-body .signup-success {
+  font-size: 0.5rem;
+  color: #81c784;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* Target img by class (avatar-image) or any img inside placeholder */
+.signup-body .avatar-image,
+.signup-body .avatar-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+  display: block;
+}
+.signup-body .avatar-placeholder {
+  overflow: hidden;
+  padding: 0;
+  width: 12rem;
+  aspect-ratio: 1;
+  margin-bottom: 0.75rem;
+}
+
+.signup-body .form-group input:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+}
+.signup-body .form-page .btn,
+.signup-body .avatar-section .btn {
+  background: rgba(60, 65, 90, 0.7);
+  color: rgba(255, 248, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  padding: 0.7rem 1.25rem;
+  font-size: 0.6rem;
+}
+.signup-body .form-page .btn {
+  margin-top: 1.5rem;
+}
+.signup-body .avatar-section .btn:hover,
+.signup-body .form-page .btn:hover {
+  background: rgba(80, 85, 110, 0.85);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+}
+
+/* Avatar picker (c1, c2, c3) */
+.signup-body .avatar-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(40, 45, 60, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 12rem;
+}
+.signup-body .avatar-picker-label {
+  font-size: 0.5rem;
+  color: rgba(255, 248, 255, 0.9);
+}
+.signup-body .avatar-picker-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.signup-body .avatar-option {
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.signup-body .avatar-option:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+}
+.signup-body .avatar-option.selected {
+  border-color: rgba(255, 248, 255, 0.9);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.25);
+}
+.signup-body .avatar-option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#signin-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (max-width: 560px) {
+  .signup-body .form-card {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0.5rem;
+  }
+  .signup-body .avatar-section {
+    align-items: center;
+  }
+  .signup-body .form-page h1 {
+    text-align: center;
+  }
+}
+
+/* Game page */
+.game-page {
+  width: 100%;
+  max-width: 900px;
+  padding: 7rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.game-header {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.game-header h1 {
+  font-size: clamp(0.75rem, 3vw, 1rem);
+  color: var(--pink-dark);
+}
+
+.game-header .buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.game-header .btn {
+  font-size: 0.5rem;
+  padding: 1rem 2rem;
+}
+
+.game-header .btn-sound {
+  padding: 0.5rem;
+  min-width: auto;
+  line-height: 0;
+}
+.game-header .btn-sound .sound-icon {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+.game-header .btn-sound.sound-off .sound-icon {
+  opacity: 0.45;
+  filter: grayscale(0.8);
+}
+
+.players-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.player-badge {
+  padding: 1rem 2rem;
+  border-radius: var(--radius-btn);
+  font-size: 0.5rem;
+  background: var(--pink-light);
+  border: 2px solid var(--pink);
+}
+
+.player-badge.active {
+  background: var(--pink);
+  color: var(--white);
+  border-color: var(--pink-dark);
+}
+
+.player-badge .score {
+  margin-left: 0.25rem;
+}
+.player-badge .player-moves {
+  margin-left: 0.2rem;
+  opacity: 0.95;
+}
+
+.grid-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.memory-grid {
+  display: grid;
+  gap: 1rem;
+  max-width: 100%;
+}
+
+.memory-grid.size-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.memory-grid.size-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.card {
+  aspect-ratio: 1;
+  max-width: 155px;
+  max-height: 155px;
+  min-width: 70px;
+  min-height: 70px;
+  cursor: pointer;
+  perspective: 700px;
+  overflow: hidden;
+  transition: opacity 0.2s;
+  background: transparent;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-in-out;
+}
+
+.card.flipped .card-inner,
+.card.matched .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-back,
+.card-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: transparent;
+  /* border: 3px solid var(--pink-dark); */
+  font-size: 1.6rem;
+  transition: transform 0.15s;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-front .card-front-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (min-width: 600px) {
+  .card {
+    max-width: 190px;
+    max-height: 190px;
+  }
+  .card-back,
+  .card-front {
+    font-size: 2rem;
+  }
+}
+
+.card:hover:not(.flipped):not(.matched) .card-back {
+  transform: scale(1.05);
+}
+
+.card.flipped .card-back,
+.card.matched .card-back {
+  pointer-events: none;
+}
+
+.card.flipped,
+.card.matched {
+  cursor: default;
+}
+
+.card.flipped .card-front,
+.card.matched .card-front {
+  background: transparent;
+  color: var(--pink-dark);
+}
+
+.card.matched .card-front {
+  opacity: 0.85;
+}
+
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 0.65rem;
+  color: var(--pink-dark);
+}
+
+/* Game page – colors to match dark forest background */
+.gamepage-body {
+  position: relative;
+}
+.gamepage-body .nav-links a {
+  color: rgba(255, 248, 240, 0.9);
+}
+.gamepage-body .game-header h1 {
+  color: rgba(255, 248, 240, 0.95);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+.gamepage-body .game-header .btn {
+  background: rgba(40, 50, 45, 0.65);
+  color: rgba(255, 248, 240, 1);
+  border: 2px solid rgba(180, 150, 90, 0.55);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+.gamepage-body .game-header .btn:hover {
+  background: rgba(55, 65, 55, 0.75);
+  border-color: rgba(200, 165, 100, 0.7);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(220, 180, 90, 0.15);
+}
+.gamepage-body .game-header .btn-sound.sound-off .sound-icon {
+  opacity: 0.5;
+}
+.gamepage-body .player-badge {
+  background: rgba(40, 50, 45, 0.6);
+  border: 2px solid rgba(180, 150, 90, 0.5);
+  color: rgba(255, 248, 240, 0.9);
+}
+.gamepage-body .player-badge.active {
+  background: rgba(120, 95, 55, 0.6);
+  color: rgba(255, 248, 240, 1);
+  border-color: rgba(220, 180, 100, 0.85);
+  box-shadow: 0 0 12px rgba(220, 170, 80, 0.2);
+}
+.gamepage-body .card-back,
+.gamepage-body .card-front {
+  /* background: transparent; */
+  background-color: #00000059;
+  border: 2px solid rgba(180, 150, 90, 0.5);
+  color: rgba(255, 248, 240, 0.95);
+  backdrop-filter: blur(2px);
+}
+.gamepage-body .card:hover:not(.flipped):not(.matched) .card-back {
+  border-color: rgba(200, 165, 100, 0.6);
+}
+.gamepage-body .card.flipped .card-front,
+.gamepage-body .card.matched .card-front {
+  background: transparent;
+  color: rgba(255, 248, 240, 1);
+  border-color: rgba(200, 165, 100, 0.6);
+}
+.gamepage-body .stats-bar {
+  color: rgba(255, 248, 240, 0.9);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+.gamepage-body .modal-overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+.gamepage-body .modal {
+  background: rgba(35, 45, 40, 0.95);
+  border: 2px solid rgba(180, 150, 90, 0.5);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(0, 0, 0, 0.2);
+}
+.gamepage-body .modal h2 {
+  color: rgba(255, 248, 240, 1);
+}
+.gamepage-body .modal .winner-text,
+.gamepage-body .modal .stats {
+  color: rgba(255, 248, 240, 0.85);
+}
+.gamepage-body .modal .btn {
+  background: rgba(40, 50, 45, 0.8);
+  color: rgba(255, 248, 240, 1);
+  border: 2px solid rgba(180, 150, 90, 0.6);
+}
+.gamepage-body .modal .btn:hover {
+  background: rgba(55, 65, 55, 0.9);
+  border-color: rgba(200, 165, 100, 0.75);
+}
+
+/* Win modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+
+.hidden {
+  display: none !important;
+}
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  font-size: 0.9rem;
+  color: var(--pink-dark);
+  margin-bottom: 1rem;
+}
+
+.modal .winner-text {
+  font-size: 0.65rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-dark);
+}
+
+.modal .stats {
+  font-size: 0.6rem;
+  color: var(--pink-dark);
+  margin-bottom: 1.25rem;
+}
+
+.modal .btn {
+  margin-right: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .game-header {
+    flex-direction: column;
+  }
+  .card {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  .card-back,
+  .card-front {
+    font-size: 1.2rem;
+  }
+}
+
+.login-body .form-page {
+  width: 30rem;
+}
+
+/* User profile – bottom left */
+.user-profile-wrap {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 50;
+}
+.user-profile-btn {
+  display: block;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.user-profile-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 16px rgba(255, 248, 240, 0.4);
+}
+.user-profile-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.user-profile-wrap.hidden {
+  display: none !important;
+}
+
+/* Profile modal – match dark ruins / earthy background theme */
+.profile-modal .modal {
+  text-align: center;
+  background: rgba(35, 45, 40, 0.92);
+  border: 2px solid rgba(180, 150, 90, 0.6);
+  color: rgba(255, 248, 240, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(180, 150, 90, 0.12);
+}
+.profile-modal .modal h2 {
+  font-size: 0.7rem;
+  color: rgba(255, 248, 240, 0.95);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+.profile-modal .profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.25rem;
+  display: block;
+  border: 3px solid rgba(180, 150, 90, 0.7);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.profile-modal .profile-username,
+.profile-modal .profile-email {
+  font-size: 0.55rem;
+  color: rgba(255, 248, 240, 0.9);
+  margin-bottom: 0.6rem;
+  word-break: break-all;
+  line-height: 1.5;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+.profile-modal .profile-email {
+  margin-bottom: 1.25rem;
+}
+.profile-modal .modal .btn {
+  background: rgba(50, 60, 55, 0.8);
+  color: rgba(255, 248, 240, 1);
+  border: 2px solid rgba(180, 150, 90, 0.6);
+  backdrop-filter: blur(6px);
+}
+.profile-modal .modal .btn:hover {
+  background: rgba(70, 80, 65, 0.9);
+  border-color: rgba(200, 165, 100, 0.75);
+  box-shadow: 0 0 20px rgba(220, 180, 90, 0.2);
+}
