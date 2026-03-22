@@ -218,10 +218,6 @@ body {
   text-align: center;
 }
 
-/* .option-group {
-  margin-bottom: 1.5rem;
-} */
-
 .option-group .buttons {
   display: flex;
   flex-wrap: wrap;
@@ -617,7 +613,7 @@ body {
 .game-page {
   width: 100%;
   max-width: 900px;
-  padding: 7rem 1rem 2rem;
+  padding: 7rem 0rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -648,7 +644,7 @@ body {
 
 .game-header .btn {
   font-size: 0.5rem;
-  padding: 1rem 2rem;
+  /* padding: 1rem 2rem; */
 }
 
 .game-header .btn-sound {
@@ -717,7 +713,7 @@ body {
 }
 
 .card {
-  aspect-ratio: 1;
+  /* aspect-ratio: 1;
   max-width: 155px;
   max-height: 155px;
   min-width: 70px;
@@ -726,7 +722,24 @@ body {
   perspective: 700px;
   overflow: hidden;
   transition: opacity 0.2s;
+  background: transparent; */
+  aspect-ratio: 1;
+  cursor: pointer;
+  perspective: 700px;
+  overflow: hidden;
+  transition: opacity 0.2s;
   background: transparent;
+}
+
+.memory-grid.size-4 .card {
+  /* Calculate width: (Screen - BodyPadding - Gaps) / 4 cards */
+  width: clamp(2.5rem, calc((100vw - 5rem) / 4), 5rem);
+  height: clamp(2.5rem, calc((100vw - 5rem) / 4), 5rem);
+}
+
+.memory-grid.size-6 .card {
+  width: clamp(2.5rem, calc((100vw - 7rem) / 6), 5rem);
+  height: clamp(2.5rem, calc((100vw - 7rem) / 6), 5rem);
 }
 
 .card-inner {
@@ -752,8 +765,7 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   background: transparent;
-  /* border: 3px solid var(--pink-dark); */
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   transition: transform 0.15s;
 }
 
@@ -772,8 +784,8 @@ body {
 
 @media (min-width: 600px) {
   .card {
-    max-width: 190px;
-    max-height: 190px;
+    width: 5rem;
+    height: 5rem;
   }
   .card-back,
   .card-front {
@@ -952,7 +964,7 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .game-header {
     flex-direction: column;
   }
@@ -964,7 +976,7 @@ body {
   .card-front {
     font-size: 1.2rem;
   }
-}
+} */
 
 .login-body .form-page {
   width: 30rem;
@@ -986,7 +998,9 @@ body {
   border-radius: 50%;
   background: transparent;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 .user-profile-btn:hover {
   transform: scale(1.08);
