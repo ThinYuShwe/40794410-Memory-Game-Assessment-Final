@@ -1066,3 +1066,134 @@ body {
   border-color: rgba(200, 165, 100, 0.75);
   box-shadow: 0 0 20px rgba(220, 180, 90, 0.2);
 }
+
+/* .page-footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  z-index: 10;
+} */
+
+.music-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s;
+  /* Optional: filter to make it pop against the background */
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
+}
+
+.music-wrap {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 50;
+  cursor: pointer;
+}
+
+.music-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Music Modal Specifics */
+.music-player-card {
+  max-width: 300px;
+  padding: 2rem;
+  position: relative;
+}
+
+.music-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: rgba(180, 150, 90, 0.8);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.player-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(180, 150, 90, 0.5);
+  margin-bottom: 1rem;
+}
+
+/* Optional: Spinning animation when playing */
+.rotating {
+  animation: spin 8s linear infinite;
+  animation-play-state: paused;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.track-name {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.track-status {
+  font-size: 0.45rem;
+  color: rgba(180, 150, 90, 1);
+  margin-bottom: 15px;
+}
+
+/* Progress Bar */
+.progress-container {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: rgba(180, 150, 90, 0.8);
+  transition: width 0.1s linear;
+}
+
+/* Controls */
+.player-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.play-pause-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(180, 150, 90, 0.6);
+  background: rgba(50, 60, 55, 0.8);
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.ctrl-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 248, 240, 0.7);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
