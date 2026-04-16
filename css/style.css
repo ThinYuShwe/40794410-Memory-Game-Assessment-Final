@@ -964,21 +964,6 @@ body {
   margin-right: 0.5rem;
 }
 
-/* Responsive */
-/* @media (max-width: 480px) {
-  .game-header {
-    flex-direction: column;
-  }
-  .card {
-    max-width: 100px;
-    max-height: 100px;
-  }
-  .card-back,
-  .card-front {
-    font-size: 1.2rem;
-  }
-} */
-
 .login-body .form-page {
   width: 30rem;
 }
@@ -1017,7 +1002,7 @@ body {
   display: none !important;
 }
 
-/* Profile modal – match dark ruins / earthy background theme */
+/* Profile modal */
 .profile-modal .modal {
   text-align: center;
   background: rgba(35, 45, 40, 0.92);
@@ -1068,27 +1053,15 @@ body {
   box-shadow: 0 0 20px rgba(220, 180, 90, 0.2);
 }
 
-/* .page-footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem;
-  z-index: 10;
-} */
-
 #playlist {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.song-duration {
+/* .song-duration {
   font-size: 1rem;
-}
+} */
 
 .music-control {
   display: flex;
@@ -1104,7 +1077,6 @@ body {
   object-fit: contain;
   cursor: pointer;
   transition: transform 0.2s;
-  /* Optional: filter to make it pop against the background */
   filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
 }
 
@@ -1176,12 +1148,6 @@ body {
   gap: 1rem;
 }
 
-/* Optional: Spinning animation when playing */
-.rotating {
-  animation: spin 8s linear infinite;
-  animation-play-state: paused;
-}
-
 .waveform {
   display: flex;
   align-items: center;
@@ -1198,7 +1164,6 @@ body {
   animation: bounce 1s infinite ease-in-out;
 }
 
-/* random heights for variation */
 .waveform span:nth-child(4n) {
   animation-delay: 0s;
   height: 12px;
@@ -1266,12 +1231,12 @@ body {
 }
 
 /* Controls */
-.player-controls {
+/* .player-controls {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-}
+} */
 
 .play-pause-btn {
   width: 50px;
