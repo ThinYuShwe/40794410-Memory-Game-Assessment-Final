@@ -119,45 +119,20 @@
         <button type="button" class="btn" id="profile-close">CLOSE</button>
       </div>
     </div>
-
     <div class="modal-overlay music-modal hidden" id="music-modal">
       <div class="modal music-player-card">
         <button class="music-close" id="music-close">×</button>
 
         <h2>BGM PLAYER</h2>
 
-        <div class="player-content">
-          <img
-            src="./assets/game/music.png"
-            alt="Album Art"
-            class="player-avatar rotating"
-          />
+        <div id="playlist"></div>
 
-          <div class="track-info">
-            <p class="track-name">Ancient Ruins Theme</p>
-            <p class="track-status" id="track-status">PAUSED</p>
-          </div>
-
-          <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-          </div>
-
-          <div class="player-controls">
-            <button type="button" class="ctrl-btn" id="btn-prev">«</button>
-            <button type="button" class="play-pause-btn" id="btn-play-pause">
-              ▶
-            </button>
-            <button type="button" class="ctrl-btn" id="btn-next">»</button>
-          </div>
-        </div>
-
-        <audio id="bgm-audio" loop>
-          <source src="assets/game/musics/music1.mp3" type="audio/mpeg" />
-        </audio>
+        <audio id="bgm-audio" loop></audio>
       </div>
     </div>
 
     <script src="js/game.js"></script>
+
     <script>
       (function () {
         var cu = localStorage.getItem("currentUser");
@@ -188,42 +163,125 @@
       })();
     </script>
     <script>
-      const musicIcon = document.querySelector(".music-wrap");
-      const musicModal = document.getElementById("music-modal");
-      const musicClose = document.getElementById("music-close");
-      const audio = document.getElementById("bgm-audio");
-      const playPauseBtn = document.getElementById("btn-play-pause");
-      const trackStatus = document.getElementById("track-status");
-      const playerImg = document.querySelector(".player-avatar");
-      const progressBar = document.getElementById("progress-bar");
+      document.addEventListener("DOMContentLoaded", () => {
+        const musicIcon = document.querySelector(".music-wrap");
+        const musicModal = document.getElementById("music-modal");
+        const musicClose = document.getElementById("music-close");
+        const audio = document.getElementById("bgm-audio");
+        const playlistContainer = document.getElementById("playlist");
 
-      // Open/Close Modal
-      musicIcon.addEventListener("click", () =>
-        musicModal.classList.remove("hidden"),
-      );
-      musicClose.addEventListener("click", () =>
-        musicModal.classList.add("hidden"),
-      );
+        let songs = [];
+        let currentSongIndex = -1;
 
-      // Play/Pause Logic
-      playPauseBtn.addEventListener("click", () => {
-        if (audio.paused) {
+        // Open / Close modal
+        musicIcon.addEventListener("click", () =>
+          musicModal.classList.remove("hidden"),
+        );
+        musicClose.addEventListener("click", () =>
+          musicModal.classList.add("hidden"),
+        );
+
+        // Load playlist from JSON
+        fetch("assets/playlist.json")
+          .then((res) => res.json())
+          .then((data) => {
+            songs = data;
+            renderPlaylist();
+          })
+          .catch((err) => console.error("JSON Error:", err));
+
+        // Play a song by index
+        function playSong(index) {
+          const song = songs[index];
+          if (!song) return;
+
+          audio.src = song.file;
           audio.play();
-          playPauseBtn.textContent = "⏸";
-          trackStatus.textContent = "NOW PLAYING";
-          playerImg.style.animationPlayState = "running";
-        } else {
-          audio.pause();
-          playPauseBtn.textContent = "▶";
-          trackStatus.textContent = "PAUSED";
-          playerImg.style.animationPlayState = "paused";
+          currentSongIndex = index;
+          updatePlaylistUI();
         }
-      });
 
-      // Update Progress Bar
-      audio.addEventListener("timeupdate", () => {
-        const percent = (audio.currentTime / audio.duration) * 100;
-        progressBar.style.width = percent + "%";
+        // Render the playlist
+        function renderPlaylist() {
+          playlistContainer.innerHTML = "";
+
+          songs.forEach((song, index) => {
+            const item = document.createElement("div");
+            item.classList.add("song-item");
+
+            item.innerHTML = `
+        <div class="art-stack small">
+          <div class="vinyl-record"></div>
+          <div class="player-wrapper">
+            <img src="${song.cover}" alt="Album Art" class="player-avatar rotating song-avatar"/>
+            <button class="mini-play-btn">▶</button>
+          </div>
+        </div>
+        <div class="music-control">
+          <div class="track-info">
+            <p class="track-name">${song.title}</p>
+            <p class="track-status">PAUSED</p>
+            <p class="song-duration">00:00</p>
+          </div>
+        </div>
+      `;
+
+            const img = item.querySelector(".song-avatar");
+            const miniPlayBtn = item.querySelector(".mini-play-btn");
+            // const durationEl = item.querySelector(".song-duration");
+
+            // // Load song duration
+            // const tempAudio = new Audio(song.file);
+            // tempAudio.addEventListener("loadedmetadata", () => {
+            //   const mins = Math.floor(tempAudio.duration / 60);
+            //   const secs = Math.floor(tempAudio.duration % 60)
+            //     .toString()
+            //     .padStart(2, "0");
+            //   durationEl.textContent = `${mins}:${secs}`;
+            // });
+
+            // Play / Pause click
+            function handlePlay() {
+              if (currentSongIndex === index && !audio.paused) {
+                audio.pause(); // toggle pause
+              } else {
+                playSong(index);
+              }
+            }
+
+            img.addEventListener("click", handlePlay);
+            miniPlayBtn.addEventListener("click", handlePlay);
+
+            // Hover effect: dim avatar when hovering mini-play button
+            miniPlayBtn.addEventListener("mouseenter", () => {
+              img.style.opacity = "0.5";
+            });
+            miniPlayBtn.addEventListener("mouseleave", () => {
+              img.style.opacity = "1";
+            });
+
+            playlistContainer.appendChild(item);
+          });
+        }
+
+        // Update UI to show which song is playing
+        function updatePlaylistUI() {
+          const items = playlistContainer.querySelectorAll(".song-item");
+          items.forEach((item, index) => {
+            const status = item.querySelector(".track-status");
+            const miniBtn = item.querySelector(".mini-play-btn");
+            status.textContent =
+              index === currentSongIndex && !audio.paused
+                ? "NOW PLAYING"
+                : "PAUSED";
+            miniBtn.textContent =
+              index === currentSongIndex && !audio.paused ? "⏸" : "▶";
+          });
+        }
+
+        // Update UI whenever audio plays/pauses
+        audio.addEventListener("play", updatePlaylistUI);
+        audio.addEventListener("pause", updatePlaylistUI);
       });
     </script>
   </body>
