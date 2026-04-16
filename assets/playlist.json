@@ -1,13 +1,11 @@
 [
   {
     "title": "Ancient Ruins Theme",
-    "artist": "In-Game BGM",
     "file": "assets/game/musics/music1.mp3",
     "cover": "assets/game/music.png"
   },
   {
-    "title": "Havana",
-    "artist": "Camila Cabello",
+    "title": "Traditional Japanese Theme",
     "file": "assets/game/musics/music2.mp3",
     "cover": "assets/game/music.png"
   }

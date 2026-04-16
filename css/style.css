@@ -897,6 +897,7 @@ body {
 }
 .gamepage-body .modal h2 {
   color: rgba(255, 248, 240, 1);
+  margin-bottom: 2rem;
 }
 .gamepage-body .modal .winner-text,
 .gamepage-body .modal .stats {
@@ -1079,13 +1080,6 @@ body {
   z-index: 10;
 } */
 
-.player-content {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
 #playlist {
   display: flex;
   flex-direction: column;
@@ -1101,6 +1095,7 @@ body {
   flex-direction: column;
   gap: 1rem;
   width: 90%;
+  align-items: flex-start;
 }
 
 .music-icon {
@@ -1177,12 +1172,76 @@ body {
 .song-item {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Optional: Spinning animation when playing */
 .rotating {
   animation: spin 8s linear infinite;
   animation-play-state: paused;
+}
+
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 30px;
+  width: 100%;
+}
+
+.waveform span {
+  flex: 1;
+  width: 3px;
+  height: 10px;
+  background: white;
+  animation: bounce 1s infinite ease-in-out;
+}
+
+/* random heights for variation */
+.waveform span:nth-child(4n) {
+  animation-delay: 0s;
+  height: 12px;
+}
+.waveform span:nth-child(4n + 1) {
+  animation-delay: 0.2s;
+  height: 18px;
+}
+.waveform span:nth-child(4n + 2) {
+  animation-delay: 0.4s;
+  height: 10px;
+}
+.waveform span:nth-child(4n + 3) {
+  animation-delay: 0.6s;
+  height: 15px;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.8);
+  }
+}
+
+.waveform span {
+  animation-play-state: paused;
+}
+
+.waveform.active span {
+  animation-play-state: running;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(2);
+  }
 }
 
 @keyframes spin {

@@ -123,7 +123,7 @@
       <div class="modal music-player-card">
         <button class="music-close" id="music-close">×</button>
 
-        <h2>BGM PLAYER</h2>
+        <h2 class="music-player-header">Music Player</h2>
 
         <div id="playlist"></div>
 
@@ -201,7 +201,6 @@
           updatePlaylistUI();
         }
 
-        // Render the playlist
         function renderPlaylist() {
           playlistContainer.innerHTML = "";
 
@@ -210,40 +209,34 @@
             item.classList.add("song-item");
 
             item.innerHTML = `
-        <div class="art-stack small">
-          <div class="vinyl-record"></div>
-          <div class="player-wrapper">
-            <img src="${song.cover}" alt="Album Art" class="player-avatar rotating song-avatar"/>
-            <button class="mini-play-btn">▶</button>
-          </div>
-        </div>
-        <div class="music-control">
-          <div class="track-info">
-            <p class="track-name">${song.title}</p>
-            <p class="track-status">PAUSED</p>
-            <p class="song-duration">00:00</p>
-          </div>
-        </div>
-      `;
+            <div class="art-stack small">
+              <div class="vinyl-record"></div>
+              <div class="player-wrapper">
+                <img src="${song.cover}" class="player-avatar song-avatar"/>
+                <button class="mini-play-btn">▶</button>
+              </div>
+            </div>
+
+            <div class="music-control">
+              <p class="track-name">${song.title}</p>
+              <div class="waveform"></div>
+            </div>
+    `;
+
+            const waveform = item.querySelector(".waveform");
+
+            // create bars
+            for (let i = 0; i < 55; i++) {
+              const bar = document.createElement("span");
+              waveform.appendChild(bar);
+            }
 
             const img = item.querySelector(".song-avatar");
             const miniPlayBtn = item.querySelector(".mini-play-btn");
-            // const durationEl = item.querySelector(".song-duration");
 
-            // // Load song duration
-            // const tempAudio = new Audio(song.file);
-            // tempAudio.addEventListener("loadedmetadata", () => {
-            //   const mins = Math.floor(tempAudio.duration / 60);
-            //   const secs = Math.floor(tempAudio.duration % 60)
-            //     .toString()
-            //     .padStart(2, "0");
-            //   durationEl.textContent = `${mins}:${secs}`;
-            // });
-
-            // Play / Pause click
             function handlePlay() {
               if (currentSongIndex === index && !audio.paused) {
-                audio.pause(); // toggle pause
+                audio.pause();
               } else {
                 playSong(index);
               }
@@ -252,10 +245,11 @@
             img.addEventListener("click", handlePlay);
             miniPlayBtn.addEventListener("click", handlePlay);
 
-            // Hover effect: dim avatar when hovering mini-play button
+            // hover effect
             miniPlayBtn.addEventListener("mouseenter", () => {
               img.style.opacity = "0.5";
             });
+
             miniPlayBtn.addEventListener("mouseleave", () => {
               img.style.opacity = "1";
             });
@@ -263,19 +257,35 @@
             playlistContainer.appendChild(item);
           });
         }
+        audio.addEventListener("play", () => {
+          document.querySelector(".waveform").classList.add("active");
+        });
 
-        // Update UI to show which song is playing
+        audio.addEventListener("pause", () => {
+          document.querySelector(".waveform").classList.remove("active");
+        });
+
         function updatePlaylistUI() {
           const items = playlistContainer.querySelectorAll(".song-item");
+
           items.forEach((item, index) => {
-            const status = item.querySelector(".track-status");
             const miniBtn = item.querySelector(".mini-play-btn");
-            status.textContent =
-              index === currentSongIndex && !audio.paused
-                ? "NOW PLAYING"
-                : "PAUSED";
-            miniBtn.textContent =
-              index === currentSongIndex && !audio.paused ? "⏸" : "▶";
+            const waveform = item.querySelector(".waveform"); // Target the specific waveform in this row
+
+            const isCurrentPlaying =
+              index === currentSongIndex && !audio.paused;
+
+            // Toggle Play/Pause icon
+            miniBtn.textContent = isCurrentPlaying ? "⏸" : "▶";
+
+            // Toggle Waveform animation for THIS song only
+            if (isCurrentPlaying) {
+              item.classList.add("active");
+              waveform.classList.add("active");
+            } else {
+              item.classList.remove("active");
+              waveform.classList.remove("active");
+            }
           });
         }
 
